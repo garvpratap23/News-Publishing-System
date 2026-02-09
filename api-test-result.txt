@@ -1,0 +1,83 @@
+﻿Testing Perplexity API Key...
+
+Response Status: 200
+Response Status Text: OK
+
+Response Body:
+{"id":"3da1e410-b654-467f-95fd-71e82479990d","model":"sonar","created":1769250216,"usage":{"prompt_tokens":27,"completion_tokens":134,"total_tokens":161,"search_context_size":"low","cost":{"input_tokens_cost":0.0,"output_tokens_cost":0.0,"request_cost":0.005,"total_cost":0.005}},"citations":["https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/","https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/","https://www.youtube.com/watch?v=JsKzJukCmOE","https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026"],"search_results":[{"title":"Top Tech News Today, January 22, 2026 - Tech Startups","url":"https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/","date":"2026-01-22","last_updated":"2026-01-24","snippet":"From Apple quietly training next-gen Siri models on Google's AI chips to Meta and Nvidia reshaping the future around massive data centers and ...","source":"web"},{"title":"The AI Revolution in January 2026: Next-Generation Technologies ...","url":"https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/","date":"2026-01-17","last_updated":"2026-01-24","snippet":"1. the rise of physical AI: CES 2026 shows a new era ┬╖ 2. evolution of large-scale language models and increased competition ┬╖ 3. memory chip ...","source":"web"},{"title":"Intel Falls as Manufacturing Snags Bedevil Comeback - YouTube","url":"https://www.youtube.com/watch?v=JsKzJukCmOE","date":"2026-01-23","last_updated":"2026-01-24","snippet":"... | Bloomberg Tech 1/22/2026. Bloomberg Technology. New. 5.2K views ┬╖ 56:46 ┬╖ Go to channel PBS NewsHour. PBS News Hour full episode, Jan. 23, ...","source":"web"},{"title":"FinTech Futures: Top five news stories of the week ΓÇô 23 January 2026","url":"https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026","date":"2026-01-23","last_updated":"2026-01-24","snippet":"Our pick of the top fintech news stories this week includes Capital One, JP Morgan, Soci├⌐t├⌐ G├⌐n├⌐rale, ThetaRay, and more.","source":"web"}],"object":"chat.completion","choices":[{"index":0,"message":{"role":"assistant","content":"**Top 2 most recent technology news stories (as of January 23-24, 2026):**\n\n1. **Intel's shares fall amid ongoing manufacturing struggles.** Bloomberg Technology reported on January 23 that Intel is grappling with production issues post-earnings, contributing to a decline in its stock price, as discussed by hosts Caroline Hyde and Ed Ludlow.[3]\n\n2. **China's largest tech firms receive initial approval to prepare orders for Nvidia's H200 AI chips.** In the same January 23 Bloomberg segment, Beijing has given preliminary green light to major Chinese companies for acquiring these advanced chips, signaling continued demand despite export restrictions.[3]"},"delta":{"role":"assistant","content":""},"finish_reason":"stop"}]}
+
+Γ£à API Key is WORKING!
+
+Parsed Response:
+{
+  "id": "3da1e410-b654-467f-95fd-71e82479990d",
+  "model": "sonar",
+  "created": 1769250216,
+  "usage": {
+    "prompt_tokens": 27,
+    "completion_tokens": 134,
+    "total_tokens": 161,
+    "search_context_size": "low",
+    "cost": {
+      "input_tokens_cost": 0,
+      "output_tokens_cost": 0,
+      "request_cost": 0.005,
+      "total_cost": 0.005
+    }
+  },
+  "citations": [
+    "https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/",
+    "https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/",
+    "https://www.youtube.com/watch?v=JsKzJukCmOE",
+    "https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026"
+  ],
+  "search_results": [
+    {
+      "title": "Top Tech News Today, January 22, 2026 - Tech Startups",
+      "url": "https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/",
+      "date": "2026-01-22",
+      "last_updated": "2026-01-24",
+      "snippet": "From Apple quietly training next-gen Siri models on Google's AI chips to Meta and Nvidia reshaping the future around massive data centers and ...",
+      "source": "web"
+    },
+    {
+      "title": "The AI Revolution in January 2026: Next-Generation Technologies ...",
+      "url": "https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/",
+      "date": "2026-01-17",
+      "last_updated": "2026-01-24",
+      "snippet": "1. the rise of physical AI: CES 2026 shows a new era ┬╖ 2. evolution of large-scale language models and increased competition ┬╖ 3. memory chip ...",
+      "source": "web"
+    },
+    {
+      "title": "Intel Falls as Manufacturing Snags Bedevil Comeback - YouTube",
+      "url": "https://www.youtube.com/watch?v=JsKzJukCmOE",
+      "date": "2026-01-23",
+      "last_updated": "2026-01-24",
+      "snippet": "... | Bloomberg Tech 1/22/2026. Bloomberg Technology. New. 5.2K views ┬╖ 56:46 ┬╖ Go to channel PBS NewsHour. PBS News Hour full episode, Jan. 23, ...",
+      "source": "web"
+    },
+    {
+      "title": "FinTech Futures: Top five news stories of the week ΓÇô 23 January 2026",
+      "url": "https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026",
+      "date": "2026-01-23",
+      "last_updated": "2026-01-24",
+      "snippet": "Our pick of the top fintech news stories this week includes Capital One, JP Morgan, Soci├⌐t├⌐ G├⌐n├⌐rale, ThetaRay, and more.",
+      "source": "web"
+    }
+  ],
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "**Top 2 most recent technology news stories (as of January 23-24, 2026):**\n\n1. **Intel's shares fall amid ongoing manufacturing struggles.** Bloomberg Technology reported on January 23 that Intel is grappling with production issues post-earnings, contributing to a decline in its stock price, as discussed by hosts Caroline Hyde and Ed Ludlow.[3]\n\n2. **China's largest tech firms receive initial approval to prepare orders for Nvidia's H200 AI chips.** In the same January 23 Bloomberg segment, Beijing has given preliminary green light to major Chinese companies for acquiring these advanced chips, signaling continued demand despite export restrictions.[3]"
+      },
+      "delta": {
+        "role": "assistant",
+        "content": ""
+      },
+      "finish_reason": "stop"
+    }
+  ]
+}

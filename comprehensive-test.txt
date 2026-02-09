@@ -1,0 +1,81 @@
+﻿=== COMPREHENSIVE PERPLEXITY API TEST ===
+
+Step 1: Preparing request...
+Request body prepared: {
+  "model": "sonar",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a news aggregator. Return the top 2 most recent news stories about technology. Format each news item as a JSON object with: title, excerpt, category, source, url, and publishedAt. Return ONLY a JSON array of news items, no additional text."
+    },
+    {
+      "role": "user",
+      "content": "Get the latest 2 technology news stories. Return them as a JSON array."
+    }
+  ],
+  "temperature": 0.2,
+  "max_tokens": 2000
+}
+
+Step 2: Sending request to Perplexity API...
+
+Step 3: Response received
+Status: 200
+Status Text: OK
+Headers: {
+  "cf-cache-status": "DYNAMIC",
+  "cf-ray": "9c2ed78cef9290d6-DEL",
+  "connection": "keep-alive",
+  "content-encoding": "gzip",
+  "content-type": "application/json",
+  "date": "Sat, 24 Jan 2026 10:28:07 GMT",
+  "server": "cloudflare",
+  "set-cookie": "__cf_bm=5z1MglLDt6HTdlaipqodn3UxjLaWBckkScMcgtx..ZA-1769250487-1.0.1.1-Sn3fPQoWd5Uy150rNlL1bdzdT6gKfzDp7YzJRzhD.uqsfdud1IOGLFxTFlpYpkWkqNNog5uAdnUSXPrqKM5lwRzPWAULAnfUJp8x4ucqy4s; path=/; expires=Sat, 24-Jan-26 10:58:07 GMT; domain=.perplexity.ai; HttpOnly; Secure; SameSite=None",
+  "strict-transport-security": "max-age=15552000; includeSubDomains; preload",
+  "transfer-encoding": "chunked"
+}
+
+Step 4: Response body (raw):
+{"id":"4d8a77d9-d668-4acf-b581-af6cc40edf7a","model":"sonar","created":1769250487,"usage":{"prompt_tokens":71,"completion_tokens":220,"total_tokens":291,"search_context_size":"low","cost":{"input_tokens_cost":0.0,"output_tokens_cost":0.0,"request_cost":0.005,"total_cost":0.005}},"citations":["https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/","https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/","https://www.globalxetfs.com/articles/the-next-big-theme-january-2026","https://www.youtube.com/watch?v=JsKzJukCmOE","https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026"],"search_results":[{"title":"Top Tech News Today, January 22, 2026 - Tech Startups","url":"https://techstartups.com/2026/01/22/top-tech-news-today-january-22-2026/","date":"2026-01-22","last_updated":"2026-01-24","snippet":"From Apple quietly training next-gen Siri models on Google's AI chips to Meta and Nvidia reshaping the future around massive data centers and ...","source":"web"},{"title":"The AI Revolution in January 2026: Next-Generation Technologies ...","url":"https://amiko.consulting/en/the-ai-revolution-in-january-2026-next-generation-technologies-to-transform-manufacturing/","date":"2026-01-17","last_updated":"2026-01-24","snippet":"1. the rise of physical AI: CES 2026 shows a new era ┬╖ 2. evolution of large-scale language models and increased competition ┬╖ 3. memory chip ...","source":"web"},{"title":"The Next Big Theme: January 2026 - Global X ETFs","url":"https://www.globalxetfs.com/articles/the-next-big-theme-january-2026","date":"2026-01-21","last_updated":"2026-01-24","snippet":"This month, we discuss disruptive trends in Data Centers, Defense Tech, AI, FinTech, AI Semiconductors, and CleanTech. ...","source":"web"},{"title":"Intel Falls as Manufacturing Snags Bedevil Comeback - YouTube","url":"https://www.youtube.com/watch?v=JsKzJukCmOE","date":"2026-01-23","last_updated":"2026-01-24","snippet":"... | Bloomberg Tech 1/22/2026. Bloomberg Technology. New. 5.2K views ┬╖ 56:46 ┬╖ Go to channel PBS NewsHour. PBS News Hour full episode, Jan. 23, ...","source":"web"},{"title":"FinTech Futures: Top five news stories of the week ΓÇô 23 January 2026","url":"https://www.fintechfutures.com/fintech/fintech-futures-top-five-news-stories-of-the-week-23-january-2026","date":"2026-01-23","last_updated":"2026-01-24","snippet":"Our pick of the top fintech news stories this week includes Capital One, JP Morgan, Soci├⌐t├⌐ G├⌐n├⌐rale, ThetaRay, and more.","source":"web"}],"object":"chat.completion","choices":[{"index":0,"message":{"role":"assistant","content":"[\n  {\n    \"title\": \"Intel Shares Fall Amid Manufacturing Struggles Post-Earnings\",\n    \"excerpt\": \"Intel's shares dropped after the company warned of ongoing manufacturing problems hindering its comeback efforts, as discussed in Bloomberg Technology on January 23, 2026.\",\n    \"category\": \"Technology\",\n    \"source\": \"Bloomberg Technology\",\n    \"url\": \"https://www.youtube.com/watch?v=JsKzJukCmOE\",\n    \"publishedAt\": \"2026-01-23\"\n  },\n  {\n    \"title\": \"China's Largest Tech Firms Approved to Order Nvidia H200 AI Chips\",\n    \"excerpt\": \"China's major tech companies received initial approval from Beijing to prepare orders for Nvidia's H200 AI chips, signaling eased restrictions amid global AI competition.\",\n    \"category\": \"Technology\",\n    \"source\": \"Bloomberg Technology\",\n    \"url\": \"https://www.youtube.com/watch?v=JsKzJukCmOE\",\n    \"publishedAt\": \"2026-01-23\"\n  }\n]"},"delta":{"role":"assistant","content":""},"finish_reason":"stop"}]}
+
+Γ£à Γ£à Γ£à API KEY IS WORKING! Γ£à Γ£à Γ£à
+
+Extracted content:
+[
+  {
+    "title": "Intel Shares Fall Amid Manufacturing Struggles Post-Earnings",
+    "excerpt": "Intel's shares dropped after the company warned of ongoing manufacturing problems hindering its comeback efforts, as discussed in Bloomberg Technology on January 23, 2026.",
+    "category": "Technology",
+    "source": "Bloomberg Technology",
+    "url": "https://www.youtube.com/watch?v=JsKzJukCmOE",
+    "publishedAt": "2026-01-23"
+  },
+  {
+    "title": "China's Largest Tech Firms Approved to Order Nvidia H200 AI Chips",
+    "excerpt": "China's major tech companies received initial approval from Beijing to prepare orders for Nvidia's H200 AI chips, signaling eased restrictions amid global AI competition.",
+    "category": "Technology",
+    "source": "Bloomberg Technology",
+    "url": "https://www.youtube.com/watch?v=JsKzJukCmOE",
+    "publishedAt": "2026-01-23"
+  }
+]
+
+Parsed news items:
+[
+  {
+    "title": "Intel Shares Fall Amid Manufacturing Struggles Post-Earnings",
+    "excerpt": "Intel's shares dropped after the company warned of ongoing manufacturing problems hindering its comeback efforts, as discussed in Bloomberg Technology on January 23, 2026.",
+    "category": "Technology",
+    "source": "Bloomberg Technology",
+    "url": "https://www.youtube.com/watch?v=JsKzJukCmOE",
+    "publishedAt": "2026-01-23"
+  },
+  {
+    "title": "China's Largest Tech Firms Approved to Order Nvidia H200 AI Chips",
+    "excerpt": "China's major tech companies received initial approval from Beijing to prepare orders for Nvidia's H200 AI chips, signaling eased restrictions amid global AI competition.",
+    "category": "Technology",
+    "source": "Bloomberg Technology",
+    "url": "https://www.youtube.com/watch?v=JsKzJukCmOE",
+    "publishedAt": "2026-01-23"
+  }
+]

@@ -1,0 +1,1 @@
+﻿{"hasPerplexityKey":true,"keyLength":53,"keyPrefix":"pplx-GGeZq","allEnvKeys":["JWT_SECRET","MONGODB_URI","PERPLEXITY_API_KEY"]}
