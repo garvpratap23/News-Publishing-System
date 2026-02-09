@@ -12,7 +12,12 @@ const TEST_USER = {
   role: 'reader'
 }
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://Garv_news:Vragps2334@cluster0.vetvb19.mongodb.net/?appName=Cluster0'
+const MONGODB_URI = process.env.MONGODB_URI
+
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI environment variable is required')
+  process.exit(1)
+}
 
 let authCookie = ''
 let articleId = ''
