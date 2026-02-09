@@ -25,3 +25,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# test and debug files
+*test*.txt
+*test*.js
+debug-*.txt
+api-test-result*.txt
+comprehensive-test.txt
+sports-test.txt
+endpoint-test.txt
