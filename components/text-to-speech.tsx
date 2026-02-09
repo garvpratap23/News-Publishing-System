@@ -27,10 +27,6 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
   const [speakingText, setSpeakingText] = useState("")
   const [progress, setProgress] = useState(0)
   const [isDraggingProgress, setIsDraggingProgress] = useState(false)
-
-  // We need to keep track of where we started in the current utterance
-  // to calculate total progress correctly when seeking.
-  // currentUtteranceOffset is the index in speakingText where the current utterance started.
   const [currentUtteranceOffset, setCurrentUtteranceOffset] = useState(0)
 
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
@@ -44,7 +40,7 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
     }
   }, [])
 
-  // Smooth progress update while playing using requestAnimationFrame
+  // requestAnimationFrame for smooth slider movement
   useEffect(() => {
     if (isPlaying && !isPaused && speakingText) {
       let lastTimestamp = 0
@@ -53,7 +49,6 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
         if (!lastTimestamp) lastTimestamp = timestamp
 
         if (isDraggingProgress) {
-          // Continue the loop but don't update progress while dragging
           animationFrameRef.current = requestAnimationFrame(updateProgress)
           return
         }
@@ -61,9 +56,7 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
         const elapsed = Date.now() - startTimeRef.current
         const textToSpeak = speakingText.substring(currentUtteranceOffset)
 
-        // Estimate: average speaking rate is ~150-200 words per minute
-        // At 1x speed, roughly 0.03 chars per ms (adjustable estimate)
-        // Adjust by speechRate
+        // rough estimate, seems to work decently
         const estimatedCharsPerMs = 0.03 * speechRate
         const estimatedCharIndex = lastBoundaryCharIndexRef.current + (elapsed * estimatedCharsPerMs)
 
@@ -72,11 +65,9 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
 
         setProgress(Math.min(newProgress, 100))
 
-        // Continue the animation loop
         animationFrameRef.current = requestAnimationFrame(updateProgress)
       }
 
-      // Start the animation loop
       animationFrameRef.current = requestAnimationFrame(updateProgress)
 
       return () => {
@@ -86,7 +77,6 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
         }
       }
     } else {
-      // Clear animation frame when not playing
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
         animationFrameRef.current = null
@@ -95,14 +85,12 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
   }, [isPlaying, isPaused, speakingText, currentUtteranceOffset, speechRate, isDraggingProgress])
 
   useEffect(() => {
-    // Strip HTML tags and prepare text
     const tempDiv = document.createElement("div")
     tempDiv.innerHTML = content
     const cleanContent = tempDiv.textContent || tempDiv.innerText || ""
     setSpeakingText(`${title}. ${cleanContent}`)
 
     return () => {
-      // Cleanup on unmount
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         window.speechSynthesis.cancel()
       }
@@ -135,24 +123,22 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
       window.speechSynthesis.resume()
       setIsPaused(false)
       setIsPlaying(true)
-      // Reset timing for smooth progress continuation
       startTimeRef.current = Date.now()
       return
     }
 
-    // Cancel any existing
+    // cancel existing speech
     if (utteranceRef.current) {
       utteranceRef.current.onend = null
       utteranceRef.current.onerror = null
     }
     window.speechSynthesis.cancel()
 
-    // Wait a moment for cancel to complete
+    // TODO: might not need this delay
     setTimeout(() => {
-      // Check if speechSynthesis is still available
       if (!window.speechSynthesis) return
 
-      // Create substring from startIndex
+      // create utterance from current position
       const textToSpeak = speakingText.substring(startIndex)
       if (!textToSpeak.trim()) {
         setProgress(100)
@@ -167,20 +153,14 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
       utterance.onboundary = (event) => {
         if (event.name === 'word' || event.name === 'sentence') {
           const charIndex = event.charIndex
-          // Update the last known position for smooth progress calculation
           lastBoundaryCharIndexRef.current = charIndex
-          startTimeRef.current = Date.now() // Reset time reference on each boundary
+          startTimeRef.current = Date.now()
 
           const totalProgress = ((startIndex + charIndex) / speakingText.length) * 100
-          // Don't update visual slider while dragging
-          if (!isDraggingProgress) {
-            setProgress(Math.min(totalProgress, 100))
-          }
         }
       }
 
       utterance.onend = () => {
-        // Only update state if this utterance is the current one
         if (utteranceRef.current === utterance) {
           if (animationFrameRef.current !== null) {
             cancelAnimationFrame(animationFrameRef.current)
@@ -196,7 +176,7 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
       }
 
       utterance.onerror = (e) => {
-        // Ignore "interrupted" and "canceled" errors as they're expected when seeking/stopping
+        // ignore expected interruptions
         if (e.error !== 'interrupted' && e.error !== 'canceled') {
           console.warn("Speech synthesis error:", e.error)
         }
@@ -237,16 +217,10 @@ export function TextToSpeech({ title, content, className }: TextToSpeechProps) {
       animationFrameRef.current = null
     }
     setIsPaused(true)
-    setIsPlaying(false) // UI state
+    setIsPlaying(false)
   }, [supported])
 
-  // Restart speech when rate changes only if already playing, maintaining position
-  // Note: changing rate resets position in standard API if we just use speak(),
-  // so we implicitly restart from essentially the same spot if we tracked it accurately,
-  // but `onboundary` is our only tracker.
-  // For MVP, we'll just restart from currentUtteranceOffset.
-  // Ideally we'd track exact char index on pause/rate change but onboundary is infrequent.
-  // We'll accept that it restarts from the beginning of the current segment (user seeked point) or 0.
+  // re-start when rate changes
   useEffect(() => {
     if (isPlaying && !isPaused) {
       speak(currentUtteranceOffset)

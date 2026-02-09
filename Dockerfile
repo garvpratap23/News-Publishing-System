@@ -1,14 +1,12 @@
-# Multi-stage build for Next.js application
+# Multi-stage build
 
-# Stage 1: Dependencies
+# Dependencies stage
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copy package files
 COPY package.json package-lock.json* pnpm-lock.yaml* ./
 
-# Install dependencies based on the lock file
 RUN \
   if [ -f package-lock.json ]; then \
     npm ci; \
@@ -18,40 +16,34 @@ RUN \
     npm install; \
   fi
 
-# Stage 2: Builder
+# Builder stage
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV MONGODB_URI=mongodb://placeholder:27017/placeholder
+ENV MONGODB_URI=mongodb://dummy:27017/test
 ENV NEXTAUTH_URL=http://localhost:3000
-ENV NEXTAUTH_SECRET=build-time-secret-placeholder
+ENV NEXTAUTH_SECRET=temp-build-secret
 
-# Build the application
 RUN npm run build
 
-# Stage 3: Runner
+# Production runner
 FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Create a non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy necessary files
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Change ownership to nextjs user
 RUN chown -R nextjs:nodejs /app
 
 USER nextjs

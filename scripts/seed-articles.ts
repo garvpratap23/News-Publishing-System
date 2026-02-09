@@ -17,9 +17,9 @@ try {
       }
     }
   })
-  console.log('✅ Loaded environment variables')
+  console.log('Loaded environment variables')
 } catch (error) {
-  console.log('⚠️  Could not load .env.local, using process.env')
+  console.log('Could not load .env.local, using process.env')
 }
 
 // MongoDB connection
@@ -127,7 +127,6 @@ function getRandomAuthor(isIndiaCategory: boolean): { name: string; email: strin
   return { name, email }
 }
 
-// Helper function to generate slug
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -289,7 +288,7 @@ async function seedArticles() {
         user = await User.create({
           name,
           email,
-          password: 'hashed_password_placeholder', // This won't be used for login
+          password: 'temp_password', // This won't be used for login
           role: 'author',
           bio: `Professional journalist and news contributor at NewsHub`,
           avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random`,

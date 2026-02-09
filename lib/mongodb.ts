@@ -18,8 +18,9 @@ if (!global.myMongoose) {
   global.myMongoose = cached
 }
 
+// this whole caching thing is kinda messy but it works
 export async function connectToDatabase() {
-  // Only validate MONGODB_URI when actually connecting
+  // only validate when actually connecting
   if (!MONGODB_URI) {
     throw new Error('Please define the MONGODB_URI environment variable')
   }
